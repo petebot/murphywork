@@ -25,6 +25,14 @@
 
   h1 {
     font-size: 8rem;
+    margin: 0;
     width: 100%;
+  }
+  h2 {
+    font-size: 4rem;
+    margin: 1rem 0 0;
+  }
+  h3 {
+    font-size: 2rem;
   }
 </style>
