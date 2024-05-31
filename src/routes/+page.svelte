@@ -24,6 +24,7 @@
   }
 
   h1 {
+    font-size: 8rem;
     width: 100%;
   }
 </style>
