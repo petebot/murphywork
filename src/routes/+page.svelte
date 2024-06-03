@@ -36,7 +36,7 @@
           {#if item.excerpt}
             <p class="excerpt">
               {item.excerpt}
-              <a href="/{item.slug.current}" class="cta">Read more &rarr;</a>
+              <a href="/{item.slug.current}" class="cta">Look & Read &rarr;</a>
             </p>
           {/if}
         </li>
