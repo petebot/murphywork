@@ -7,7 +7,9 @@ export async function load() {
       mainImage,
       publishedAt,
       excerpt,
-      "author": author->name
+      slug,
+      "author": author->name,
+"categories": categories[]->title
     }
   `);
 

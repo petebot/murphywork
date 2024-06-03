@@ -1,7 +1,6 @@
 <script lang="ts">
   import { urlFor } from "../sanity";
   export let data: any;
-  console.log("Data received in Svelte:", data); // Debugging: Log data in Svelte template
 
   function formatDate(dateString: string): string {
     const options = { year: "numeric", month: "long", day: "numeric" } as const;
@@ -19,22 +18,27 @@
     <ul class="auto-grid">
       {#each data.data as item}
         <li>
-          {#if item.mainImage && item.mainImage.asset}
-            <div
-              class="image"
-              style:background-image={`url(${urlFor(item.mainImage).url()})`}
-            ></div>
+          {#if item.mainImage && item.mainImage.asset}<a
+              href="/{item.slug.current}"
+            >
+              <div
+                class="image"
+                style:background-image={`url(${urlFor(item.mainImage).url()})`}
+              ></div></a
+            >
           {/if}
-          <h3>{item.title}</h3>
+          <h3><a href="/{item.slug.current}">{item.title}</a></h3>
           {#if item.publishedAt}
             <time datetime={item.publishedAt}
               >{formatDate(item.publishedAt)}</time
             >
           {/if}
           {#if item.excerpt}
-            <p class="excerpt">{item.excerpt}</p>
+            <p class="excerpt">
+              {item.excerpt}
+              <a href="/{item.slug.current}" class="cta">Read more &rarr;</a>
+            </p>
           {/if}
-          <a href="" class="cta">Read more &rarr;</a>
         </li>
       {/each}
     </ul>
@@ -69,12 +73,17 @@
     text-transform: uppercase;
     font-size: 0.875rem;
     font-weight: 200;
+    font-family: var(--font-head);
   }
   .cta {
     text-transform: uppercase;
     font-size: 0.75rem;
     font-weight: 400;
     letter-spacing: 0.1rem;
+    font-family: var(--font-head);
+    word-break: keep-all;
+    display: inline-flex;
+    align-items: center;
   }
   .image {
     width: 100%;
