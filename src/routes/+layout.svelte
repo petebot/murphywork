@@ -23,7 +23,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url(/wormpaper/worms-dark.png);
   }
 
   main {
