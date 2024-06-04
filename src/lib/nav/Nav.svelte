@@ -8,6 +8,9 @@
 </h1>
 
 <ul class="categories metadata">
+  <li>
+    <a class={$page.url.pathname === "/" ? "active" : ""} href="/">All Worms</a>
+  </li>
   {#each categories as category}
     <li>
       <a
