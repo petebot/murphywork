@@ -29,6 +29,7 @@ declare module '$env/static/private' {
 	export const VITE_SANITY_PROJECT_ID: string;
 	export const VITE_SANITY_DATASET: string;
 	export const VITE_SANITY_API_VERSION: string;
+	export const SANITY_TOKEN: string;
 	export const GREP_COLOR: string;
 	export const MANPATH: string;
 	export const LESS_TERMCAP_mb: string;
@@ -133,6 +134,7 @@ declare module '$env/dynamic/private' {
 		VITE_SANITY_PROJECT_ID: string;
 		VITE_SANITY_DATASET: string;
 		VITE_SANITY_API_VERSION: string;
+		SANITY_TOKEN: string;
 		GREP_COLOR: string;
 		MANPATH: string;
 		LESS_TERMCAP_mb: string;
