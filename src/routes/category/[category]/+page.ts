@@ -3,7 +3,6 @@ import client from '../../../sanity';
 
 export const load: PageLoad = async ({ params }) => {
   const { category } = params;
-  console.log('Fetching posts for category slug:', category); // Log the category slug
 
   // Fetch the category details using the slug
   const categoryData = await client.fetch(`
@@ -40,7 +39,6 @@ export const load: PageLoad = async ({ params }) => {
     } 
   `, { categoryId: categoryData._id });
 
-  console.log('Fetched posts for category:', posts); // Log the fetched posts
 
   // If the category is 'story-cycle', group the posts by their 'storyCycleName'
 
@@ -63,8 +61,6 @@ export const load: PageLoad = async ({ params }) => {
     // Flatten the grouped posts into a single array and store in a writable store
     storyCycles =  Object.values(groupedPosts).flat()
 }
-
-  console.log('storyCycles: ', storyCycles)
 
   return { data: { posts, categoryTitle: categoryData.title }, categoryDescription: categoryData.description, storyCycles, category };
 };

@@ -7,7 +7,6 @@
   $: posts = data.data.posts;
 
   let cyclePosts = data.storyCycles
-  console.log('cyclePosts: ',data.storyCycles)
 
   const groupedStories = cyclePosts
   ? cyclePosts.reduce((grouped, story) => {
@@ -30,7 +29,6 @@ const groupedStoriesArray = cyclePosts
   ? Object.entries(groupedStories).map(([key, value]) => ({ storyCycleName: key, storyCycleDescription: value.description, stories: value.stories })) 
   : [];
 
-console.log('Grouped Stories by Story Cycle Name with Description and Sorted by PublishedAt Date:', groupedStoriesArray);
 </script>
 
 <main>
