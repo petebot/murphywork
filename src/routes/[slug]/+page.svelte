@@ -43,7 +43,7 @@
     {#if worm.body}
       <div class="write"><PortableText value={worm?.body} {components} /></div>
     {/if}
-    {#if relatedWorms}
+    {#if relatedWorms && relatedWorms > 0}
       <section>
         <h3>Related Worms</h3>
         <div class="auto-grid">

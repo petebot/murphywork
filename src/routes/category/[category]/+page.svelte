@@ -3,11 +3,6 @@
   export let data: any;
   $: categoryTitle = data.data.categoryTitle;
   $: posts = data.data.posts;
-
-  function formatDate(dateString: string): string {
-    const options = { year: "numeric", month: "long", day: "numeric" } as const;
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  }
 </script>
 
 <main>
