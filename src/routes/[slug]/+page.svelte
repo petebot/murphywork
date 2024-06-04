@@ -7,7 +7,6 @@
 
   $: worm = data.data.post;
   $: relatedWorms = data.data.relatedPosts;
-  console.log(data.data);
 
   function formatDate(dateString: string): string {
     const options = { year: "numeric", month: "long", day: "numeric" } as const;

@@ -9,12 +9,12 @@ export async function load() {
       excerpt,
       slug,
       "author": author->name,
-"categories": categories[]->{
+      "categories": categories[]->{
         _id,
         title,
         slug
       }
-    }
+    } | order(publishedAt desc)
   `);
 
   return { data };

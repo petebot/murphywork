@@ -3,7 +3,6 @@ import client from '../../sanity';
 
 export const load: PageLoad = async ({ params }) => {
   const { slug } = params;
-  console.log('Fetching post with slug:', slug); // Log the slug
 
   // Fetch the current post data
   const post = await client.fetch(`
@@ -33,11 +32,9 @@ export const load: PageLoad = async ({ params }) => {
       slug,
       "author": author->name,
       "categories": categories[]->title
-    }
+    } | order(publishedAt desc)
   `, { slug, categoryIds });
 
-  console.log('Fetched post data:', post); // Log the fetched data
-  console.log('Fetched related posts:', relatedPosts); // Log the related posts
 
   return { data: { post, relatedPosts } };
 };

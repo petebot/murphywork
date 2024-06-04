@@ -11,12 +11,15 @@ export const load = async ({ params }: Parameters<PageLoad>[0]) => {
     *[_type == "category" && slug.current == $category][0]{
       _id,
       title,
-      slug
-    }
+      slug,
+      description
+    } | order(publishedAt desc)
   `, { category });
 
+    console.log('catdesc: ', categoryData.description)
+
   // Fetch posts for the specific category
-  const posts = await client.fetch(`
+  let posts = await client.fetch(`
     *[_type == "post" && references($categoryId)] {
       title,
       mainImage,
@@ -24,15 +27,46 @@ export const load = async ({ params }: Parameters<PageLoad>[0]) => {
       excerpt,
       slug,
       "author": author->name,
-"categories": categories[]->{
+      "categories": categories[]->{
         _id,
         title,
-        slug
-      }
-    }
+        slug,
+        description
+      },
+      "storyCycleName": storyCycleName[]->{
+        _id,
+        title,
+        slug,
+        description
+      },
+    } | order(publishedAt desc)
   `, { categoryId: categoryData._id });
 
   console.log('Fetched posts for category:', posts); // Log the fetched posts
 
-  return { data: { posts, categoryTitle: categoryData.title } };
+  // If the category is 'story-cycle', group the posts by their 'storyCycleName'
+
+  let storyCycles
+  if (category === 'story-cycles') {
+    const groupedPosts = posts.reduce((grouped, post) => {
+        const key = post.storyCycleName[0].title; // Access the title from the storyCycleName array
+        if (!grouped[key]) {
+            grouped[key] = [];
+        }
+        
+        // Check if the post is not already in the group before adding it
+        if (!grouped[key].some(p => p.title === post.title)) {
+            grouped[key].push(post);
+        }
+        
+        return grouped;
+    }, {});
+    
+    // Flatten the grouped posts into a single array and store in a writable store
+    storyCycles =  Object.values(groupedPosts).flat()
+}
+
+  console.log('storyCycles: ', storyCycles)
+
+  return { data: { posts, categoryTitle: categoryData.title }, categoryDescription: categoryData.description, storyCycles, category };
 };
