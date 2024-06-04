@@ -12,10 +12,9 @@ export const load: PageLoad = async ({ params }) => {
       title,
       slug,
       description
-    } | order(publishedAt desc)
+    } 
   `, { category });
 
-    console.log('catdesc: ', categoryData.description)
 
   // Fetch posts for the specific category
   let posts = await client.fetch(`
@@ -38,7 +37,7 @@ export const load: PageLoad = async ({ params }) => {
         slug,
         description
       },
-    } | order(publishedAt desc)
+    } 
   `, { categoryId: categoryData._id });
 
   console.log('Fetched posts for category:', posts); // Log the fetched posts
