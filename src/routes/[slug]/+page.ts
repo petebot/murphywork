@@ -4,7 +4,9 @@ import client from '../../sanity';
 export const load: PageLoad = async ({ params }) => {
   const { slug } = params;
   console.log('Fetching post with slug:', slug); // Log the slug
-  const data = await client.fetch(`
+
+  // Fetch the current post data
+  const post = await client.fetch(`
     *[_type == "post" && slug.current == $slug][0]{
       title,
       mainImage,
@@ -12,8 +14,30 @@ export const load: PageLoad = async ({ params }) => {
       "illustrator": illustrator->name,
       publishedAt,
       body,
-"categories": categories[]->title
+      "categories": categories[]->{
+        _id,
+        title,
+        slug
+      }
     }
   `, { slug });
-  return { data };
+
+  // Fetch related posts based on the same categories
+  const categoryIds = post.categories.map(category => category._id);
+  const relatedPosts = await client.fetch(`
+    *[_type == "post" && slug.current != $slug && references($categoryIds)] | order(_createdAt desc)[0...3] {
+      title,
+      mainImage,
+      publishedAt,
+      excerpt,
+      slug,
+      "author": author->name,
+      "categories": categories[]->title
+    }
+  `, { slug, categoryIds });
+
+  console.log('Fetched post data:', post); // Log the fetched data
+  console.log('Fetched related posts:', relatedPosts); // Log the related posts
+
+  return { data: { post, relatedPosts } };
 };

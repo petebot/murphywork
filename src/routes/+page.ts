@@ -9,7 +9,11 @@ export async function load() {
       excerpt,
       slug,
       "author": author->name,
-"categories": categories[]->title
+"categories": categories[]->{
+        _id,
+        title,
+        slug
+      }
     }
   `);
 

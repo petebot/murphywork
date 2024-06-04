@@ -1,4 +1,10 @@
 <script>
+  import Nav from "$lib/nav/Nav.svelte";
+
+  export let data;
+
+  let categories = data.data;
+
   import "./styles.css";
 </script>
 
@@ -11,6 +17,8 @@
   <meta name="msapplication-TileColor" content="#ffc40d" />
   <meta name="theme-color" content="#ffffff" />
 </svelte:head>
+
+<Nav {categories}></Nav>
 
 <div class="app">
   <main>
