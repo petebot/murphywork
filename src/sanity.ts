@@ -7,6 +7,7 @@ const config: ClientConfig = {
   projectId: import.meta.env.VITE_SANITY_PROJECT_ID, // Access the environment variable
   dataset: import.meta.env.VITE_SANITY_DATASET, // Access the environment variable
   apiVersion: import.meta.env.VITE_SANITY_API_VERSION, // Use the latest API version
+  token: import.meta.env.VITE_SANITY_TOKEN, // Your API token
   useCdn: false, // `false` if you want to ensure fresh data
   perspective: 'previewDrafts', // 'raw' | 'previewDrafts' | 'published'
 };
