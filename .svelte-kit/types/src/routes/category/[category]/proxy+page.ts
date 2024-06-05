@@ -10,11 +10,14 @@ export const load = async ({ params }: Parameters<PageLoad>[0]) => {
     *[_type == "category" && slug.current == $category][0]{
       _id,
       title,
-      slug,
-      description
-    } 
+      slug
+    }
   `, { category });
 
+  if (!categoryData) {
+    console.error(`Category data not found for slug: ${category}`);
+    return { data: { posts: [], categoryTitle: '', storyCycles: [], category: '' } };
+  }
 
   // Fetch posts for the specific category
   let posts = await client.fetch(`
@@ -28,40 +31,40 @@ export const load = async ({ params }: Parameters<PageLoad>[0]) => {
       "categories": categories[]->{
         _id,
         title,
-        slug,
-        description
+        slug
       },
       "storyCycleName": storyCycleName[]->{
         _id,
         title,
-        slug,
-        description
-      },
-    } 
+        slug
+      }
+    }
   `, { categoryId: categoryData._id });
 
-
-  // If the category is 'story-cycle', group the posts by their 'storyCycleName'
-
-  let storyCycles
+  let storyCycles: any[] = [];
   if (category === 'story-cycles') {
-    const groupedPosts = posts.reduce((grouped, post) => {
-        const key = post.storyCycleName[0].title; // Access the title from the storyCycleName array
-        if (!grouped[key]) {
-            grouped[key] = [];
-        }
-        
-        // Check if the post is not already in the group before adding it
-        if (!grouped[key].some(p => p.title === post.title)) {
-            grouped[key].push(post);
-        }
-        
-        return grouped;
+    const groupedPosts: Record<string, any[]> = posts.reduce((grouped: Record<string, any[]>, post: any) => {
+      const key: string | undefined = post.storyCycleName[0]?.title;
+      if (key) {
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
+      if (!grouped[key].some((p: any) => p.title === post.title)) {
+        grouped[key].push(post);
+      }
+      }
+      return grouped;
     }, {});
-    
-    // Flatten the grouped posts into a single array and store in a writable store
-    storyCycles =  Object.values(groupedPosts).flat()
-}
 
-  return { data: { posts, categoryTitle: categoryData.title }, categoryDescription: categoryData.description, storyCycles, category };
+    storyCycles = Object.values(groupedPosts).flat();
+  }
+
+  return {
+    data: {
+      posts,
+      categoryTitle: categoryData.title,
+      storyCycles,
+      category
+    }
+  };
 };

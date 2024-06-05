@@ -1,25 +1,49 @@
 <script lang="ts">
-  import Worm from "$lib/display/Worm.svelte";
-  import { urlFor } from "../../sanity";
-  import { PortableText } from "@portabletext/svelte";
+  import PrevNext from '$lib/nav/PrevNext.svelte';
+
+  import Worm from '$lib/display/Worm.svelte';
+  import { urlFor } from '../../sanity';
+  import { PortableText } from '@portabletext/svelte';
 
   export let data: any;
 
-  $: worm = data.data.post;
-  $: relatedWorms = data.data.relatedPosts;
+  let worm: any;
+  let relatedWorms: string | any[] = [];
+  let suitePosts: any[] = [];
+  let previousPost: { slug: { current: any; }; title: any; } | null = null;
+  let nextPost: { slug: { current: any; }; title: any; } | null = null;
 
   function formatDate(dateString: string): string {
-    const options = { year: "numeric", month: "long", day: "numeric" } as const;
+    const options = { year: 'numeric', month: 'long', day: 'numeric' } as const;
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
 
-  // Define the components object
-  const components = {};
+  $: {
+    worm = data.data.post;
+    relatedWorms = data.data.relatedPosts;
+    suitePosts = data.data.suitePosts;
+
+    updatePreviousNextPosts();
+  }
+
+  function updatePreviousNextPosts() {
+    if (suitePosts && suitePosts.length > 0 && worm && worm.publishedAt) {
+      suitePosts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+      const currentIndex = suitePosts.findIndex(post => new Date(post.publishedAt).getTime() === new Date(worm.publishedAt).getTime());
+      if (currentIndex !== -1) {
+        previousPost = suitePosts[currentIndex - 1] || null;
+        nextPost = suitePosts[currentIndex + 1] || null;
+      }
+    }
+  }
 </script>
 
 <main>
+  <PrevNext {previousPost} {nextPost}></PrevNext>
   {#if worm}
-    <h1>{worm.title}</h1>
+    {#if worm.title}
+      <h1>{worm.title}</h1>
+    {/if}
     {#if worm.mainImage && worm.mainImage.asset}
       <img src={urlFor(worm.mainImage).url()} alt={worm.title} />
     {/if}
@@ -40,9 +64,13 @@
       {/if}
     </div>
     {#if worm.body}
-      <div class="write"><PortableText value={worm?.body} {components} /></div>
+      <div class="write">
+        <PortableText value={worm.body} components={{}} />
+      </div>
     {/if}
-    {#if relatedWorms && relatedWorms > 0}
+    <PrevNext {previousPost} {nextPost}></PrevNext>
+
+    {#if relatedWorms.length > 0}
       <section>
         <h3>Related Worms</h3>
         <div class="auto-grid">

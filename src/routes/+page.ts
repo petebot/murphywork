@@ -12,7 +12,8 @@ export async function load() {
       "categories": categories[]->{
         _id,
         title,
-        slug
+        slug,
+        description
       }
     } | order(publishedAt desc)
   `);
