@@ -1,50 +1,67 @@
 <script lang="ts">
+  import { navigationStore } from "$lib/store";
   export let previousPost;
   export let nextPost;
+
+  function updateNavType(direction: string) {
+    navigationStore.set({ useFly: true, flyDirection: direction });
+
+    // Reset the store after .25 second
+    setTimeout(() => {
+      navigationStore.set({ useFly: false, flyDirection: "next" });
+    }, 250);
+  }
 </script>
 
 {#if previousPost || nextPost}
   <div class="navigation">
     <div class="prev">
       {#if previousPost}
-        <div class="arrow">
-          <svg viewBox="0 0 23 48">
-            <g class="svg-icon">
-              <polyline
-                fill="none"
-                stroke-miterlimit="10"
-                points="21.5,1.3 2.6,23.4 21.5,45.7 "
-              ></polyline>
-            </g>
-          </svg>
-        </div>
-        <div class="worm-info">
-          <a href={`/${previousPost.slug.current}`}
-            ><div class="prehead">Previous</div>
-            <div class="title">{previousPost.title}</div></a
-          >
-        </div>
+        <a
+          href={`/${previousPost.slug.current}`}
+          on:click={() => updateNavType("prev")}
+        >
+          <div class="arrow">
+            <svg viewBox="0 0 23 48">
+              <g class="svg-icon">
+                <polyline
+                  fill="none"
+                  stroke-miterlimit="10"
+                  points="21.5,1.3 2.6,23.4 21.5,45.7 "
+                ></polyline>
+              </g>
+            </svg>
+          </div>
+          <div class="worm-info">
+            <div class="prehead">Previous</div>
+            <div class="title">{previousPost.title}</div>
+          </div>
+        </a>
       {/if}
     </div>
+
     <div class="next">
       {#if nextPost}
-        <div class="arrow">
-          <svg viewBox="0 0 23 48">
-            <g class="svg-icon">
-              <polyline
-                fill="none"
-                stroke-miterlimit="10"
-                points="1.5,45.7 20.4,23.5 1.5,1.3 "
-              ></polyline>
-            </g>
-          </svg>
-        </div>
-        <div class="worm-info">
-          <a href={`/${nextPost.slug.current}`}
-            ><div class="prehead">Next</div>
-            <div class="title">{nextPost.title}</div></a
-          >
-        </div>
+        <a
+          href={`/${nextPost.slug.current}`}
+          on:click={() => updateNavType("next")}
+        >
+          <div class="arrow">
+            <svg viewBox="0 0 23 48">
+              <g class="svg-icon">
+                <polyline
+                  fill="none"
+                  stroke-miterlimit="10"
+                  points="1.5,45.7 20.4,23.5 1.5,1.3 "
+                ></polyline>
+              </g>
+            </svg>
+          </div>
+          <div class="worm-info">
+            <div class="prehead">Next</div>
+            <div class="title">{nextPost.title}</div>
+          </div>
+        </a>
       {/if}
     </div>
   </div>
@@ -58,8 +75,8 @@
     justify-content: space-between;
     font-family: var(--font-head);
   }
-  .next,
-  .prev {
+  .next a,
+  .prev a {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -68,7 +85,7 @@
     display: flex;
     flex-direction: column;
   }
-  .next {
+  .next a {
     text-align: right;
     flex-direction: row-reverse;
   }

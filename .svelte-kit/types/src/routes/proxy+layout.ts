@@ -1,7 +1,8 @@
+// @ts-nocheck
 import type { LayoutLoad } from "./$types";
 import client from "../sanity";
 
-export const load: LayoutLoad = async ({
+export const load = async ({
   url: { pathname },
 }: {
   url: { pathname: string };
@@ -11,3 +12,4 @@ export const load: LayoutLoad = async ({
 
   return { data, pathname };
 };
+;null as any as LayoutLoad;

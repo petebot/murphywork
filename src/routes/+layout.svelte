@@ -1,11 +1,14 @@
-<script>
+<script lang="ts">
+  import "./styles.css";
   import Nav from "$lib/nav/Nav.svelte";
+  import PageTransition from "$lib/helpers/PageTransition.svelte";
 
   export let data;
 
   let categories = data.data;
 
-  import "./styles.css";
+  $: useFly = false;
+  $: flyDirection = "";
 </script>
 
 <svelte:head>
@@ -22,7 +25,9 @@
 
 <div class="app">
   <main>
-    <slot />
+    <PageTransition pathname={data.pathname}>
+      <slot />
+    </PageTransition>
   </main>
 </div>
 
