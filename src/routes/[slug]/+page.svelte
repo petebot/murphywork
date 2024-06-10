@@ -1,20 +1,21 @@
 <script lang="ts">
-  import PrevNext from '$lib/nav/PrevNext.svelte';
+  import PrevNext from "$lib/nav/PrevNext.svelte";
 
-  import Worm from '$lib/display/Worm.svelte';
-  import { urlFor } from '../../sanity';
-  import { PortableText } from '@portabletext/svelte';
+  import Worm from "$lib/display/Worm.svelte";
+  import { urlFor } from "../../sanity";
+  import { PortableText } from "@portabletext/svelte";
+  import InlineImage from "$lib/display/InlineImage.svelte";
 
   export let data: any;
 
   let worm: any;
   let relatedWorms: string | any[] = [];
   let suitePosts: any[] = [];
-  let previousPost: { slug: { current: any; }; title: any; } | null = null;
-  let nextPost: { slug: { current: any; }; title: any; } | null = null;
+  let previousPost: { slug: { current: any }; title: any } | null = null;
+  let nextPost: { slug: { current: any }; title: any } | null = null;
 
   function formatDate(dateString: string): string {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' } as const;
+    const options = { year: "numeric", month: "long", day: "numeric" } as const;
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
 
@@ -28,8 +29,15 @@
 
   function updatePreviousNextPosts() {
     if (suitePosts && suitePosts.length > 0 && worm && worm.publishedAt) {
-      suitePosts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-      const currentIndex = suitePosts.findIndex(post => new Date(post.publishedAt).getTime() === new Date(worm.publishedAt).getTime());
+      suitePosts.sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      );
+      const currentIndex = suitePosts.findIndex(
+        (post) =>
+          new Date(post.publishedAt).getTime() ===
+          new Date(worm.publishedAt).getTime()
+      );
       if (currentIndex !== -1) {
         previousPost = suitePosts[currentIndex - 1] || null;
         nextPost = suitePosts[currentIndex + 1] || null;
@@ -65,7 +73,10 @@
     </div>
     {#if worm.body}
       <div class="write">
-        <PortableText value={worm.body} components={{}} />
+        <PortableText
+          value={worm.body}
+          components={{ types: { image: InlineImage } }}
+        />
       </div>
     {/if}
     <PrevNext {previousPost} {nextPost}></PrevNext>
