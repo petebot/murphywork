@@ -1,5 +1,14 @@
-<script>
+<script lang="ts">
   import "./styles.css";
+  import Nav from "$lib/nav/Nav.svelte";
+  import PageTransition from "$lib/helpers/PageTransition.svelte";
+
+  export let data;
+
+  let categories = data.data;
+
+  $: useFly = false;
+  $: flyDirection = "";
 </script>
 
 <svelte:head>
@@ -12,9 +21,13 @@
   <meta name="theme-color" content="#ffffff" />
 </svelte:head>
 
+<Nav {categories}></Nav>
+
 <div class="app">
   <main>
-    <slot />
+    <PageTransition pathname={data.pathname}>
+      <slot />
+    </PageTransition>
   </main>
 </div>
 
@@ -23,7 +36,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url(/wormpaper/worms-dark.png);
   }
 
   main {
