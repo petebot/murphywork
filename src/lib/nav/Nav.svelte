@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  export let categories: any = [{ title: "Replace" }, { title: "These" }];
+  export let categories: any = [];
+  export let pages: any = [];
 </script>
 
 <h1>
@@ -11,13 +12,23 @@
   <li>
     <a class={$page.url.pathname === "/" ? "active" : ""} href="/">All Worms</a>
   </li>
-  {#each categories as category}
+  {#each categories as item}
     <li>
       <a
-        class={$page.url.pathname === `/category/${category.slug.current}`
+        class={$page.url.pathname === `/category/${item.slug.current}`
           ? "active"
           : ""}
-        href={`/category/${category.slug.current}`}>{category.title}</a
+        href={`/category/${item.slug.current}`}>{item.title}</a
+      >
+    </li>
+  {/each}
+  {#each pages as item}
+    <li>
+      <a
+        class={$page.url.pathname === `/page/${item.slug.current}`
+          ? "active"
+          : ""}
+        href={`/page/${item.slug.current}`}>{item.title}</a
       >
     </li>
   {/each}
