@@ -1,15 +1,15 @@
 <script lang="ts">
   import PrevNext from "$lib/nav/PrevNext.svelte";
 
-  import Worm from "$lib/display/Worm.svelte";
+  import Work from "$lib/display/Work.svelte";
   import { urlFor } from "../../sanity";
   import { PortableText } from "@portabletext/svelte";
   import InlineImage from "$lib/display/InlineImage.svelte";
 
   export let data: any;
 
-  let worm: any;
-  let relatedWorms: string | any[] = [];
+  let work: any;
+  let relatedWorks: string | any[] = [];
   let suitePosts: any[] = [];
   let previousPost: { slug: { current: any }; title: any } | null = null;
   let nextPost: { slug: { current: any }; title: any } | null = null;
@@ -20,15 +20,15 @@
   }
 
   $: {
-    worm = data.data.post;
-    relatedWorms = data.data.relatedPosts;
+    work = data.data.post;
+    relatedWorks = data.data.relatedPosts;
     suitePosts = data.data.suitePosts;
 
     updatePreviousNextPosts();
   }
 
   function updatePreviousNextPosts() {
-    if (suitePosts && suitePosts.length > 0 && worm && worm.publishedAt) {
+    if (suitePosts && suitePosts.length > 0 && work && work.publishedAt) {
       suitePosts.sort(
         (a, b) =>
           new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
@@ -36,7 +36,7 @@
       const currentIndex = suitePosts.findIndex(
         (post) =>
           new Date(post.publishedAt).getTime() ===
-          new Date(worm.publishedAt).getTime()
+          new Date(work.publishedAt).getTime()
       );
       if (currentIndex !== -1) {
         previousPost = suitePosts[currentIndex - 1] || null;
@@ -48,51 +48,51 @@
 
 <main>
   <PrevNext {previousPost} {nextPost}></PrevNext>
-  {#if worm}
-    {#if worm.title}
-      <h1>{worm.title}</h1>
+  {#if work}
+    {#if work.title}
+      <h1>{work.title}</h1>
     {/if}
-    {#if worm.mainImage && worm.mainImage.asset}
-      <img src={urlFor(worm.mainImage).url()} alt={worm.title} />
+    {#if work.mainImage && work.mainImage.asset}
+      <img src={urlFor(work.mainImage).url()} alt={work.title} />
     {/if}
     <div class="metadata">
-      {#if worm.publishedAt}
-        <p>{formatDate(worm.publishedAt)}</p>
+      {#if work.publishedAt}
+        <p>{formatDate(work.publishedAt)}</p>
       {/if}
-      {#if worm.author}
-        <p>Written by {worm.author}</p>
+      {#if work.author}
+        <p>Written by {work.author}</p>
       {/if}
-      {#if worm.illustrator}
-        <p>Illustrated by {worm.illustrator}</p>
+      {#if work.illustrator}
+        <p>Illustrated by {work.illustrator}</p>
       {/if}
-      {#if worm.categories}
-        {#each worm.categories as category}
+      {#if work.categories}
+        {#each work.categories as category}
           <p>{category.title}</p>
         {/each}
       {/if}
     </div>
-    {#if worm.body}
+    {#if work.body}
       <div class="write">
         <PortableText
-          value={worm.body}
+          value={work.body}
           components={{ types: { image: InlineImage } }}
         />
       </div>
     {/if}
     <PrevNext {previousPost} {nextPost}></PrevNext>
 
-    {#if relatedWorms.length > 0}
+    {#if relatedWorks.length > 0}
       <section>
-        <h3>Related Worms</h3>
+        <h3>Related Works</h3>
         <div class="auto-grid">
-          {#each relatedWorms as item}
-            <Worm {item} />
+          {#each relatedWorks as item}
+            <Work {item} />
           {/each}
         </div>
       </section>
     {/if}
   {:else}
-    <p>Loading worm...</p>
+    <p>Loading work...</p>
   {/if}
 </main>
 

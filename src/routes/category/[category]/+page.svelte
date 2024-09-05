@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { beforeUpdate } from 'svelte';
-  import Worm from "$lib/display/Worm.svelte";
+  import { beforeUpdate } from "svelte";
+  import Work from "$lib/display/Work.svelte";
   export let data: any;
 
   let categoryTitle;
@@ -33,33 +33,37 @@
       }, {});
 
       for (const key in groupedStories) {
-        groupedStories[key].stories.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+        groupedStories[key].stories.sort(
+          (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+        );
       }
 
-      groupedStoriesArray = Object.entries(groupedStories).map(([key, value]) => ({
-        storyCycleName: key,
-        stories: value.stories
-      }));
+      groupedStoriesArray = Object.entries(groupedStories).map(
+        ([key, value]) => ({
+          storyCycleName: key,
+          stories: value.stories,
+        })
+      );
     }
   };
 </script>
 
 <main>
   <h1>{categoryTitle}</h1>
-  
-  {#if category === 'story-cycles'}
+
+  {#if category === "story-cycles"}
     {#each groupedStoriesArray as cycle}
       <h2>{cycle.storyCycleName}</h2>
       <ul class="auto-grid">
         {#each cycle.stories as item}
-          <Worm {item} />
+          <Work {item} />
         {/each}
       </ul>
     {/each}
   {:else if posts && posts.length > 0}
     <ul class="auto-grid">
       {#each posts as item}
-        <Worm {item} />
+        <Work {item} />
       {/each}
     </ul>
   {:else}

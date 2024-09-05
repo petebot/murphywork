@@ -31,12 +31,14 @@ declare module '$env/static/private' {
 	export const VITE_SANITY_API_VERSION: string;
 	export const VITE_SANITY_TOKEN: string;
 	export const GREP_COLOR: string;
+	export const NVM_RC_VERSION: string;
 	export const MANPATH: string;
 	export const LESS_TERMCAP_mb: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const LESS_TERMCAP_md: string;
 	export const INIT_CWD: string;
+	export const NVM_CD_FLAGS: string;
 	export const LESS_TERMCAP_me: string;
 	export const TERM: string;
 	export const SHELL: string;
@@ -51,6 +53,7 @@ declare module '$env/static/private' {
 	export const LESS_TERMCAP_ue: string;
 	export const npm_config_noproxy: string;
 	export const npm_config_local_prefix: string;
+	export const NVM_DIR: string;
 	export const USER: string;
 	export const GREP_COLORS: string;
 	export const COMMAND_MODE: string;
@@ -63,6 +66,7 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const npm_package_json: string;
 	export const _: string;
+	export const LaunchInstanceID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_init_module: string;
 	export const USER_ZDOTDIR: string;
@@ -92,8 +96,9 @@ declare module '$env/static/private' {
 	export const npm_config_user_agent: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const GIT_ASKPASS: string;
-	export const INFOPATH: string;
 	export const HOMEBREW_CELLAR: string;
+	export const INFOPATH: string;
+	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
@@ -135,12 +140,14 @@ declare module '$env/dynamic/private' {
 		VITE_SANITY_API_VERSION: string;
 		VITE_SANITY_TOKEN: string;
 		GREP_COLOR: string;
+		NVM_RC_VERSION: string;
 		MANPATH: string;
 		LESS_TERMCAP_mb: string;
 		TERM_PROGRAM: string;
 		NODE: string;
 		LESS_TERMCAP_md: string;
 		INIT_CWD: string;
+		NVM_CD_FLAGS: string;
 		LESS_TERMCAP_me: string;
 		TERM: string;
 		SHELL: string;
@@ -155,6 +162,7 @@ declare module '$env/dynamic/private' {
 		LESS_TERMCAP_ue: string;
 		npm_config_noproxy: string;
 		npm_config_local_prefix: string;
+		NVM_DIR: string;
 		USER: string;
 		GREP_COLORS: string;
 		COMMAND_MODE: string;
@@ -167,6 +175,7 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		npm_package_json: string;
 		_: string;
+		LaunchInstanceID: string;
 		npm_config_userconfig: string;
 		npm_config_init_module: string;
 		USER_ZDOTDIR: string;
@@ -196,8 +205,9 @@ declare module '$env/dynamic/private' {
 		npm_config_user_agent: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		GIT_ASKPASS: string;
-		INFOPATH: string;
 		HOMEBREW_CELLAR: string;
+		INFOPATH: string;
+		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
 		COLORTERM: string;

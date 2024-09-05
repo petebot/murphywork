@@ -5,12 +5,12 @@
 </script>
 
 <h1>
-  <a class={$page.url.pathname === "/" ? "active" : ""} href="/">Let's Worm</a>
+  <a class={$page.url.pathname === "/" ? "active" : ""} href="/">Murphy Work</a>
 </h1>
 
 <ul class="categories metadata">
   <li>
-    <a class={$page.url.pathname === "/" ? "active" : ""} href="/">All Worms</a>
+    <a class={$page.url.pathname === "/" ? "active" : ""} href="/">All Work</a>
   </li>
   {#each categories as item}
     <li>

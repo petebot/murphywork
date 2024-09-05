@@ -1,18 +1,18 @@
 <script lang="ts">
-  import Worm from "../lib/display/Worm.svelte";
+  import Work from "../lib/display/Work.svelte";
 
   export let data: any;
 </script>
 
 <svelte:head>
-  <title>Let's Worm</title>
-  <meta name="description" content="Let's Worm" />
+  <title>Let's Work</title>
+  <meta name="description" content="Let's Work" />
 </svelte:head>
 <section>
   {#if data.data && data.data.length > 0}
     <ul class="auto-grid">
       {#each data.data as item}
-        <Worm {item}></Worm>
+        <Work {item}></Work>
       {/each}
     </ul>
   {:else}

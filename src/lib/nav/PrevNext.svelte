@@ -32,7 +32,7 @@
               </g>
             </svg>
           </div>
-          <div class="worm-info">
+          <div class="work-info">
             <div class="prehead">Previous</div>
             <div class="title">{previousPost.title}</div>
           </div>
@@ -57,7 +57,7 @@
               </g>
             </svg>
           </div>
-          <div class="worm-info">
+          <div class="work-info">
             <div class="prehead">Next</div>
             <div class="title">{nextPost.title}</div>
           </div>
@@ -81,7 +81,7 @@
     flex-direction: row;
     gap: 1rem;
   }
-  .worm-info {
+  .work-info {
     display: flex;
     flex-direction: column;
   }
@@ -106,7 +106,7 @@
     .navigation {
       margin-top: 1rem;
     }
-    .worm-info .title {
+    .work-info .title {
       max-width: 6rem;
       flex: 1;
       white-space: nowrap;
