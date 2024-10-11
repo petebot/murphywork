@@ -9,19 +9,25 @@
 </script>
 
 <li>
-  {#if item.mainImage && item.mainImage.asset && item.slug.current && item.title}<a href="/{item.slug.current}">
+  {#if item.mainImage && item.mainImage.asset && item.slug?.current && item.title}<a
+      href="/{item.slug?.current}"
+    >
       <img
         src={urlFor(item.mainImage).width(512).height(288).url()}
         alt={item.title}
       />
     </a>
-    <h3><a href="/{item.slug.current}">{item.title}</a></h3>
+    <h3><a href="/{item.slug?.current}">{item.title}</a></h3>
   {/if}
   <div class="metadata">
     {#if item.categories}
       {#each item.categories as category}
         <p class="categories">
-          <a href={category.slug.current ? `/category/${category.slug.current}`: ''}>{category.title}</a>
+          <a
+            href={category.slug?.current
+              ? `/category/${category.slug?.current}`
+              : ""}>{category.title}</a
+          >
         </p>
       {/each}
     {/if}
@@ -31,10 +37,10 @@
       <time datetime={item.publishedAt}>{formatDate(item.publishedAt)}</time>
     {/if}
   </div>
-  {#if item.excerpt && item.slug.current}
+  {#if item.excerpt && item.slug?.current}
     <p class="excerpt">
       {item.excerpt}
-      <a href="/{item.slug.current}" class="cta">Look & Read &rarr;</a>
+      <a href="/{item.slug?.current}" class="cta">Look & Read &rarr;</a>
     </p>
   {/if}
 </li>

@@ -12,26 +12,30 @@
   <li>
     <a class={$page.url.pathname === "/" ? "active" : ""} href="/">All Work</a>
   </li>
-  {#each categories as item}
-    <li>
-      <a
-        class={$page.url.pathname === `/category/${item.slug.current}`
-          ? "active"
-          : ""}
-        href={`/category/${item.slug.current}`}>{item.title}</a
-      >
-    </li>
-  {/each}
-  {#each pages as item}
-    <li>
-      <a
-        class={$page.url.pathname === `/page/${item.slug.current}`
-          ? "active"
-          : ""}
-        href={`/page/${item.slug.current}`}>{item.title}</a
-      >
-    </li>
-  {/each}
+  {#if categories}
+    {#each categories as item}
+      <li>
+        <a
+          class={$page.url.pathname === `/category/${item.slug?.current}`
+            ? "active"
+            : ""}
+          href={`/category/${item.slug?.current}`}>{item.title}</a
+        >
+      </li>
+    {/each}
+  {/if}
+  {#if pages}
+    {#each pages as item}
+      <li>
+        <a
+          class={$page.url.pathname === `/page/${item.slug?.current}`
+            ? "active"
+            : ""}
+          href={`/page/${item.slug?.current}`}>{item.title}</a
+        >
+      </li>
+    {/each}
+  {/if}
 </ul>
 
 <style>

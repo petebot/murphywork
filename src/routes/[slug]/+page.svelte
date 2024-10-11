@@ -59,12 +59,12 @@
       {#if work.publishedAt}
         <p>{formatDate(work.publishedAt)}</p>
       {/if}
-      {#if work.author}
+      <!-- {#if work.author}
         <p>Written by {work.author}</p>
       {/if}
       {#if work.illustrator}
         <p>Illustrated by {work.illustrator}</p>
-      {/if}
+      {/if} -->
       {#if work.categories}
         {#each work.categories as category}
           <p>{category.title}</p>
