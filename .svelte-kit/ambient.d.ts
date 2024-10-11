@@ -30,8 +30,8 @@ declare module '$env/static/private' {
 	export const VITE_SANITY_DATASET: string;
 	export const VITE_SANITY_API_VERSION: string;
 	export const VITE_SANITY_TOKEN: string;
-	export const GREP_COLOR: string;
 	export const NVM_RC_VERSION: string;
+	export const GREP_COLOR: string;
 	export const MANPATH: string;
 	export const LESS_TERMCAP_mb: string;
 	export const TERM_PROGRAM: string;
@@ -96,8 +96,8 @@ declare module '$env/static/private' {
 	export const npm_config_user_agent: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const GIT_ASKPASS: string;
-	export const HOMEBREW_CELLAR: string;
 	export const INFOPATH: string;
+	export const HOMEBREW_CELLAR: string;
 	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
 	export const npm_config_prefix: string;
@@ -139,8 +139,8 @@ declare module '$env/dynamic/private' {
 		VITE_SANITY_DATASET: string;
 		VITE_SANITY_API_VERSION: string;
 		VITE_SANITY_TOKEN: string;
-		GREP_COLOR: string;
 		NVM_RC_VERSION: string;
+		GREP_COLOR: string;
 		MANPATH: string;
 		LESS_TERMCAP_mb: string;
 		TERM_PROGRAM: string;
@@ -205,8 +205,8 @@ declare module '$env/dynamic/private' {
 		npm_config_user_agent: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		GIT_ASKPASS: string;
-		HOMEBREW_CELLAR: string;
 		INFOPATH: string;
+		HOMEBREW_CELLAR: string;
 		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
 		npm_config_prefix: string;
